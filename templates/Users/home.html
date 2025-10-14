@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% block title %}Home | Multi-User Chat Automation{% endblock title %}
+
+{% block content %}
+<section class="text-center py-16">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-indigo-400 mb-4 animate-fadeIn">
+        Welcome to Multi-User Chat Automation
+    </h1>
+    <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+        Connect multiple users, send messages, and let the automated bot respond in real time using WebSockets.
+        Experience seamless concurrent conversations powered by Django Channels.
+    </p>
+
+    <div class="mt-10 flex justify-center space-x-6">
+        <a href="#" class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition">
+            Get Started
+        </a>
+        <a href="#" class="border border-indigo-400 text-indigo-400 hover:bg-indigo-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition">
+            Learn More
+        </a>
+    </div>
+</section>
+
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+    <div class="bg-gray-800 rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h3 class="text-xl font-semibold text-indigo-400 mb-3">🔗 Real-Time Messaging</h3>
+        <p class="text-gray-300">Leverage Django Channels and WebSockets for live communication between users and the bot.</p>
+    </div>
+    <div class="bg-gray-800 rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h3 class="text-xl font-semibold text-indigo-400 mb-3">🤖 Automated Bot Engine</h3>
+        <p class="text-gray-300">Pluggable and rule-based bot that handles concurrent user conversations intelligently.</p>
+    </div>
+    <div class="bg-gray-800 rounded-2xl p-6 shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h3 class="text-xl font-semibold text-indigo-400 mb-3">📊 Message Persistence</h3>
+        <p class="text-gray-300">All messages are stored in the database with user roles, timestamps, and conversation history.</p>
+    </div>
+</section>
+{% endblock content %}

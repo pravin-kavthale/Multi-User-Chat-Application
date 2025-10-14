@@ -1,0 +1,14 @@
+<aside class="w-64 bg-white shadow-md p-4 hidden md:block">
+    <h2 class="text-lg font-semibold mb-4">Menu</h2>
+    <ul class="space-y-2">
+        <li><a href="{% url 'dashboard' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">Dashboard</a></li>
+        {% if user.is_patient %}
+            <li><a href="{% url 'chat_rooms' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">My Chats</a></li>
+            <li><a href="{% url 'find_doctor' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">Find Doctor</a></li>
+        {% elif user.is_doctor %}
+            <li><a href="{% url 'manage_chats' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">Manage Chats</a></li>
+            <li><a href="{% url 'analytics' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">Analytics</a></li>
+        {% endif %}
+        <li><a href="{% url 'profile' %}" class="block px-3 py-2 rounded hover:bg-indigo-100">Profile</a></li>
+    </ul>
+</aside>
