@@ -13,6 +13,11 @@ from .models import ChatRoom, Messages
 from django.contrib.auth.models import User
 from .bot import get_bot_response
 
+import time
+from datetime import timedelta
+from django.utils import timezone
+
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.username = self.scope['url_route']['kwargs']['username']
@@ -50,8 +55,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)# takes json stringand convert it into python object
         user_message = data['message']
-
         room = await self.get_room(self.username)
+
+        #Rate limiting: Allow max 2 message in a minute
+        allowed= await self.check_rate_limit(room)
+        if not allowed:
+            await self.send(text_data=json.dumps({
+                'message': 'Rate limit exceeded!!!!!!        Please wait before sending more messages.',
+                'role': 'bot',
+                'timestamp': str(datetime.now())
+            }))
+            return
 
         # Save user message
         await self.save_message(room, user_message, 'user')
@@ -72,6 +86,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'role': 'bot',
             'timestamp': str(datetime.now())
         }))
+    
+    @sync_to_async
+    def check_rate_limit(self,room):
+        one_miute_ago= timezone.now() - timedelta(minutes=1)
+        message_count= Messages.objects.filter(room=room, role='user', timestamp__gte=one_miute_ago).count()
+        return message_count < 2
 
     # Helper methods
 
@@ -83,7 +103,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @sync_to_async
     def get_messages(self, room, limit=20):
-        return list(Messages.objects.filter(room=room).order_by('timestamp')[:limit])
+        return list(Messages.objects.filter(room=room).order_by('-timestamp')[:limit])
 
     @sync_to_async
     def save_message(self, room, content, role):
