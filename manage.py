@@ -3,6 +3,11 @@
 import os
 import sys
 
+from dotenv import load_dotenv
+
+load_dotenv()  # Loads all variables from .env file
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "UserChatAutomation.settings")
+
 
 def main():
     """Run administrative tasks."""

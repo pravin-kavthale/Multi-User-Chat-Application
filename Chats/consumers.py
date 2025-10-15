@@ -3,6 +3,7 @@ import django
 django.setup()
 
 # Chats/consumers.py
+
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 import json
@@ -10,6 +11,7 @@ import asyncio
 from datetime import datetime
 from .models import ChatRoom, Messages
 from django.contrib.auth.models import User
+from .bot import get_bot_response
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -46,7 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
+        data = json.loads(text_data)# takes json stringand convert it into python object
         user_message = data['message']
 
         room = await self.get_room(self.username)
@@ -62,7 +64,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         # Bot response
         await asyncio.sleep(2)
-        bot_response = f"Bot: You said '{user_message}'"
+        bot_response = await get_bot_response(user_message)
         await self.save_message(room, bot_response, 'bot')
 
         await self.send(text_data=json.dumps({
