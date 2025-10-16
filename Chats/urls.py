@@ -1,8 +1,8 @@
-from django.contrib import admin
 from django.urls import path
-from Users import views as UserViews
-
+from . import views
+from .views import ChatHistoryAPIView
 
 urlpatterns = [
-    
+    path('chat/', views.ChatView, name='chat_room'),  
+    path('api/history/<str:username>/', ChatHistoryAPIView.as_view(), name='chat-history'),
 ]

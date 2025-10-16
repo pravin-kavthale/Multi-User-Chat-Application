@@ -12,12 +12,23 @@
     </p>
 
     <div class="mt-10 flex justify-center space-x-6">
-        <a href="#" class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition">
-            Get Started
+        <!-- Link to chat room -->
+        <a href="{% url 'chat_room' %}" 
+           class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition">
+            Chat Room
         </a>
-        <a href="#" class="border border-indigo-400 text-indigo-400 hover:bg-indigo-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition">
-            Learn More
-        </a>
+
+        <!-- History button -->
+        <button id="historyBtn"
+           class="border border-indigo-400 text-indigo-400 hover:bg-indigo-500 hover:text-white font-semibold py-3 px-6 rounded-lg transition">
+            History
+        </button>
+    </div>
+
+    <!-- Chat history container -->
+    <div id="chatHistory" class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-xl shadow-lg hidden">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">Your Chat History</h2>
+        <div id="historyContent" class="space-y-3 max-h-96 overflow-y-auto scroll-smooth"></div>
     </div>
 </section>
 
@@ -35,4 +46,59 @@
         <p class="text-gray-300">All messages are stored in the database with user roles, timestamps, and conversation history.</p>
     </div>
 </section>
+
+<script>
+    const historyBtn = document.getElementById('historyBtn');
+    const chatHistoryDiv = document.getElementById('chatHistory');
+    const historyContent = document.getElementById('historyContent');
+
+    historyBtn.addEventListener('click', async () => {
+        const username = "{{ request.user.username }}";
+        try {
+            const response = await fetch(`/Chats/api/history/${username}/`);
+            const data = await response.json();
+
+            // Clear previous content
+            historyContent.innerHTML = "";
+
+            if (data.length === 0) {
+                historyContent.innerHTML = "<p>No messages found.</p>";
+            } else {
+                data.forEach(msg => {
+                    const cardWrapper = document.createElement('div');
+                    cardWrapper.className = msg.role === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+                    const card = document.createElement('div');
+                    if (msg.role === 'user') {
+                        card.className = 'bg-indigo-100 text-indigo-800 px-4 py-3 rounded-xl shadow-lg max-w-xs break-words text-right';
+                    } else {
+                        card.className = 'bg-gray-100 text-gray-800 px-4 py-3 rounded-xl shadow-lg max-w-xs break-words text-left';
+                    }
+
+                    // Format timestamp to HH:MM
+                    const time = new Date(msg.timestamp);
+                    const hours = String(time.getHours()).padStart(2, '0');
+                    const minutes = String(time.getMinutes()).padStart(2, '0');
+                    const formattedTime = `${hours}:${minutes}`;
+
+                    card.innerHTML = `
+                        <div class="text-xs text-gray-500 mb-1">${formattedTime}</div>
+                        <div class="text-sm">${msg.content}</div>
+                    `;
+
+                    cardWrapper.appendChild(card);
+                    historyContent.appendChild(cardWrapper);
+                });
+            }
+
+            chatHistoryDiv.classList.remove('hidden');
+
+            // Scroll to bottom (latest chat)
+            historyContent.scrollTop = historyContent.scrollHeight;
+
+        } catch (error) {
+            console.error("Failed to fetch chat history:", error);
+        }
+    });
+</script>
 {% endblock content %}

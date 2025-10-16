@@ -10,10 +10,11 @@ class ChatRoom(models.Model):
     def __str__(self):
         return f"ChatRoom of {self.user.username}"
 
-class Messgaes(models.Model):
+class Messages(models.Model):
     room=models.ForeignKey(ChatRoom,on_delete=models.CASCADE,related_name='messages')
     sender=models.ForeignKey(User,on_delete=models.CASCADE)
-    message=models.TextField()
+    role = models.CharField(max_length=10, choices=[('user','User'),('bot','Bot')], default='user')
+    content=models.TextField()
     timestamp=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
