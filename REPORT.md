@@ -59,7 +59,7 @@ async def receive(self, text_data):
         {"type": "chat_message", "message": bot_reply, "sender": "Bot"}
     )
 ```
-# 🧵 Handling Concurrency
+#@ 🧵 Handling Concurrency
 
 - **Async Consumers:** `AsyncWebsocketConsumer` ensures non-blocking message handling.
 - **Redis Pub/Sub:** Enables concurrent communication between multiple consumers.
@@ -69,7 +69,7 @@ async def receive(self, text_data):
 
 ---
 
-# 🔁 Reliability & Fault Tolerance
+## 🔁 Reliability & Fault Tolerance
 
 | Mechanism           | Description                                                                 |
 |--------------------|-----------------------------------------------------------------------------|
@@ -82,7 +82,7 @@ async def receive(self, text_data):
 
 ---
 
-# 🧰 Scalability Considerations
+## 🧰 Scalability Considerations
 
 The application can scale horizontally by:
 
@@ -94,7 +94,7 @@ As all operations are asynchronous, scaling primarily depends on Redis throughpu
 
 ---
 
-# 🧩 Design Decisions Summary
+## 🧩 Design Decisions Summary
 
 | Component       | Choice              | Reason                              |
 |-----------------|------------------|------------------------------------|
@@ -107,7 +107,7 @@ As all operations are asynchronous, scaling primarily depends on Redis throughpu
 
 ---
 
-# 🧠 Conclusion
+## 🧠 Conclusion
 
 The Multi-User Chat Automation project achieves:
 
