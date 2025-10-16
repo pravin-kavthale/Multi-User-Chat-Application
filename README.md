@@ -58,71 +58,69 @@ pip install -r requirements.txt
         touch .env
    ```
 5. Add the following inside .env:
-   ``` bash
-    DJANGO_SETTINGS_MODULE=UserChatAutomation.settings
-    DEBUG=True
-    GENAI_API_KEY=your_generated_key
-    
-    
-    
-    MYSQL_DB_NAME=your database name
-    MYSQL_USER= mysql username
-    MYSQL_PASSWORD=password
-    MYSQL_HOST=localhost
-    MYSQL_PORT=3306
-   ```
+``` bash
+   DJANGO_SETTINGS_MODULE=UserChatAutomation.settings
+   DEBUG=True
+   GENAI_API_KEY=your_generated_key
+     
+   MYSQL_DB_NAME=your database name
+   MYSQL_USER= mysql username
+   MYSQL_PASSWORD=password
+   MYSQL_HOST=localhost
+   MYSQL_PORT=3306
+```
 ### 🗃 5. MySQL Database Setup
 
-Step 1: Open MySQL and Create Database
-Step 2: Update settings.py
-In your UserChatAutomation/settings.py, update the DATABASES configuration:
-``` python
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_DB_NAME'),
-        'USER': os.getenv('MYSQL_USER'),
-        'PASSWORD': os.getenv('MYSQL_PASSWORD'),
-        'HOST': os.getenv('MYSQL_HOST'),
-        'PORT': os.getenv('MYSQL_PORT'),
+   Step 1: Open MySQL and Create Database
+   Step 2: Update settings.py
+   In your UserChatAutomation/settings.py, update the DATABASES configuration:
+   ``` python
+   DATABASES = {
+   'default': {
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': os.getenv('MYSQL_DB_NAME'),
+      'USER': os.getenv('MYSQL_USER'),
+      'PASSWORD': os.getenv('MYSQL_PASSWORD'),
+      'HOST': os.getenv('MYSQL_HOST'),
+      'PORT': os.getenv('MYSQL_PORT'),
     }
-}
-```
-Step 3: Apply Migrations
-``` bash
-python manage.py makemigrations
-python manage.py migrate
-```
-step 4: Create super user
-```bash
-python manage.py createsuperuser
-```
-###🐧 6. Setup WSL and Redis (For Real-Time Messaging)
-Step 1: Install WSL (Windows)
-Open PowerShell as Administrator and run:
-``` bash
-wsl --install
-```
-Restart your system when prompted.
-Step 2: Install Ubuntu (from Microsoft Store)
-``` bash
-wsl --install -d Ubuntu
-```
-Step 3: Update and Install Redis inside Ubuntu
-``` bash
-sudo apt update
-sudo apt install redis-server
-```
-Step 4: Enable and Start Redis
-``` bash
-sudo service redis-server start
-```
-Step 5: Test Redis
-``` bash
-redis-cli ping
-# Should return: PONG
-```
-### 🌐 7. Install Daphne (ASGI Server)
+   }
+   ```
+   Step 3: Apply Migrations
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+   step 4: Create super user
+   ```bash
+   python manage.py createsuperuser
+   ```
+   ###🐧 6. Setup WSL and Redis (For Real-Time Messaging)
+   Step 1: Install WSL (Windows)
+   Open PowerShell as Administrator and run:
+   ``` bash
+   wsl --install
+   ```
+   Restart your system when prompted.
+   Step 2: Install Ubuntu (from Microsoft Store)
+   ``` bash
+   wsl --install -d Ubuntu
+   ```
+   Step 3: Update and Install Redis inside Ubuntu
+   ``` bash
+   sudo apt update
+   sudo apt install redis-server
+   ```
+   Step 4: Enable and Start Redis
+   ``` bash
+   sudo service redis-server start
+   ```
+   Step 5: Test Redis
+   ``` bash
+   redis-cli ping
+   # Should return: PONG
+   ```
+### 🌐 6. Install Daphne (ASGI Server)
 Daphne is required to handle WebSockets with Django Channels.
 ```bash
 pip install daphne
@@ -132,7 +130,7 @@ Run this command from the project root:
 ``` bash
 Run this command from the project root:
 ```
-### 💬 9. Testing Multi-User Real-Time Chat
+### 💬 7. Testing Multi-User Real-Time Chat
 Open two different browsers (e.g., Chrome and Firefox) or use incognito mode.
 Log in with two different users.
 Both users can chat in real time with the AI Bot.
@@ -146,7 +144,7 @@ Messages are stored in MySQL and fetched via the REST API for chat history.
 | Start Django Dev Server  | `python manage.py runserver`                           |
 | Start Daphne ASGI Server | `python -m daphne UserChatAutomation.asgi:application` |
 | Collect Static Files     | `python manage.py collectstatic`                       |
-### 11. Directory Structure
+### 8. Directory Structure
 ``` bash
 multi-user-chat-automation/
 │
@@ -177,7 +175,7 @@ multi-user-chat-automation/
 ├── requirements.txt
 └── README.md
 ```
-### 🧠 12. Key Modules Used
+### 🧠 9. Key Modules Used
 channels — for asynchronous WebSocket communication
 asgiref — ASGI interface support
 daphne — production-ready ASGI server
@@ -185,7 +183,7 @@ redis — message broker for real-time communication
 google-generativeai — for Gemini integration
 rest_framework — for chat history API
 mysqlclient — MySQL database connection
-### 🎯 Final Notes
+### 🎯 10. Final Notes
 ✅ Supports multi-user concurrent chat
 ✅ Fetches chat history dynamically using REST APIs
 ✅ Uses Redis for scalability and real-time message handling
