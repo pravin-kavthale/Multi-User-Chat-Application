@@ -144,7 +144,7 @@ Messages are stored in MySQL and fetched via the REST API for chat history.
 | Start Django Dev Server  | `python manage.py runserver`                           |
 | Start Daphne ASGI Server | `python -m daphne UserChatAutomation.asgi:application` |
 | Collect Static Files     | `python manage.py collectstatic`                       |
-### 8. Directory Structure
+### 🧰 8. Directory Structure
 ``` bash
 multi-user-chat-automation/
 │
@@ -176,18 +176,18 @@ multi-user-chat-automation/
 └── README.md
 ```
 ### 🧠 9. Key Modules Used
-channels — for asynchronous WebSocket communication
-asgiref — ASGI interface support
-daphne — production-ready ASGI server
-redis — message broker for real-time communication
-google-generativeai — for Gemini integration
-rest_framework — for chat history API
-mysqlclient — MySQL database connection
+channels — for asynchronous WebSocket communication.
+asgiref — ASGI interface support.
+daphne — production-ready ASGI server.
+redis — message broker for real-time communication.
+google-generativeai — for Gemini integration.
+rest_framework — for chat history API.
+mysqlclient — MySQL database connection.
 ### 🎯 10. Final Notes
-✅ Supports multi-user concurrent chat
-✅ Fetches chat history dynamically using REST APIs
-✅ Uses Redis for scalability and real-time message handling
-✅ Gemini AI provides intelligent automated responses
-✅ Tested with multiple browser sessions simultaneously
+✅ Supports multi-user concurrent chat.
+✅ Fetches chat history dynamically using REST APIs.
+✅ Uses Redis for scalability and real-time message handling.
+✅ Gemini AI provides intelligent automated responses.
+✅ Tested with multiple browser sessions simultaneously.
 
 
