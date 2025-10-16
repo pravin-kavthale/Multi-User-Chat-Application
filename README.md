@@ -185,9 +185,13 @@ rest_framework — for chat history API.
 mysqlclient — MySQL database connection.
 ### 🎯 10. Final Notes
 ✅ Supports multi-user concurrent chat.
+
 ✅ Fetches chat history dynamically using REST APIs.
+
 ✅ Uses Redis for scalability and real-time message handling.
+
 ✅ Gemini AI provides intelligent automated responses.
+
 ✅ Tested with multiple browser sessions simultaneously.
 
 
