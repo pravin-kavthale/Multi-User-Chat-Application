@@ -177,12 +177,19 @@ multi-user-chat-automation/
 ```
 ### 🧠 9. Key Modules Used
 channels — for asynchronous WebSocket communication.
+
 asgiref — ASGI interface support.
+
 daphne — production-ready ASGI server.
+
 redis — message broker for real-time communication.
+
 google-generativeai — for Gemini integration.
+
 rest_framework — for chat history API.
+
 mysqlclient — MySQL database connection.
+
 ### 🎯 10. Final Notes
 ✅ Supports multi-user concurrent chat.
 
