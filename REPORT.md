@@ -59,7 +59,7 @@ async def receive(self, text_data):
         {"type": "chat_message", "message": bot_reply, "sender": "Bot"}
     )
 ```
-#@ 🧵 Handling Concurrency
+## 🧵 Handling Concurrency
 
 - **Async Consumers:** `AsyncWebsocketConsumer` ensures non-blocking message handling.
 - **Redis Pub/Sub:** Enables concurrent communication between multiple consumers.
